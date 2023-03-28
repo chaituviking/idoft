@@ -8,7 +8,7 @@
 
 name: Java CI with Maven
 
-on:
+on: 
   push:
     branches: [ "main" ]
   pull_request:
@@ -21,17 +21,15 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up JDK 17
+    - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
-        java-version: '17'
+        java-version: '11'
         distribution: 'temurin'
         cache: maven
     - name: Build with Maven
-    - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir idoft && cp target/*.jar idoft
-    - uses: actions/upload-artifact@v3
-      with:
-        name: Package
-        path: idoft
+    - run: mvn --batch-mode --update-snapshots package
    
+      # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
+    - name: Update dependency graph
+      uses: advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
