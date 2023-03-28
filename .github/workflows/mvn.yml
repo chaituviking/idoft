@@ -27,11 +27,11 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
     - run: mvn --batch-mode --update-snapshots verify
-    - run: mkdir idoft && cp target/*.jar idoft
+    - run: mkdir workflows && cp target/*.jar workflows
     - uses: actions/upload-artifact@v3
       with:
          name: Package
-         path: idoft
+         path: workflows
    
       # Optional: Uploads the full dependency graph to GitHub to improve the quality of Dependabot alerts this repository can receive
     - name: Update dependency graph
